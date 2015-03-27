@@ -22,4 +22,5 @@ urlpatterns = patterns('',
     url(r'^', include(router.urls)),
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/registration/', include('rest_auth.registration.urls')),
+    url(r'^account/', include('allauth.urls')),
 )
