@@ -5,35 +5,63 @@ from .models import *
 class ProjectSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Project
-        fields = ('name', 'ethogram', 'members', 'admins')
+        fields = (
+                    'created_by', 'updated_by',
+                    'name', 'ethogram', 'members', 'admins',
+                    'session_set', 'individual_set',
+                 )
 
-class EthogramSerializer(serializers.HyperlinkedModelSerializer):
+class EthogramSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ethogram
-        fields = ('name', 'information')
+        fields = (
+                    'created_by', 'updated_by',
+                    'name', 'information',
+                    'project_set', 'behaviour_set',
+                 )
 
-class BehaviourSerializer(serializers.HyperlinkedModelSerializer):
+class BehaviourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Behaviour
-        fields = ('name', 'information', 'ethogram')
+        fields = (
+                    'created_by', 'updated_by',
+                    'name', 'ethogram', 'information', 'photo',
+                    'observation_set',
+                 )
+
 
 class SessionSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Session
-        fields = ('project', 'session_type', 'individuals')
+        fields = (
+                    'created_by', 'updated_by',
+                    'project', 'session_type', 'individuals',
+                    'observation_set',
+                 )
 
 class ObservationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Observation
-        fields = ('session', 'recorded_behaviour', 'information',
-                  'timestamp', 'individual', 'location', 'weather')
+        fields = (
+                    'created_by', 'updated_by',
+                    'session', 'recorded_behaviour', 'information', 'photo', 'timestamp', 'individual', 'location', 'weather'
+                 )
 
 class IndividualSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Individual
-        fields = ('label', 'tags', 'project')
+        fields = (
+                    'created_by', 'updated_by',
+                    'label', 'photo', 'tags', 'project',
+                    'observation_set',
+                 )
 
 class TagSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Tag
-        fields = ('name', )
+        fields = (
+                    'created_by', 'updated_by',
+                    'name',
+                    'individual_set',
+                 )
+

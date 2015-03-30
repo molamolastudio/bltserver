@@ -1,7 +1,12 @@
 from django.conf.urls import patterns, include, url
-from rest_framework import routers, serializers, viewsets
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib import admin
-from accounts.views import UserViewSet
+from django.conf.urls.static import static
+from django.conf import settings
+
+from rest_framework import routers, serializers, viewsets
+
+from accounts.views import UserViewSet, FacebookLogin
 from biolife.views import *
 
 router = routers.DefaultRouter()
@@ -23,4 +28,7 @@ urlpatterns = patterns('',
     url(r'^auth/', include('rest_auth.urls')),
     url(r'^auth/registration/', include('rest_auth.registration.urls')),
     url(r'^account/', include('allauth.urls')),
-)
+    url(r'^auth/facebook/$', FacebookLogin.as_view(), name='fb_login')
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()
