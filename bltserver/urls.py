@@ -6,7 +6,7 @@ from django.conf import settings
 
 from rest_framework import routers, serializers, viewsets
 
-from accounts.views import UserViewSet, FacebookLogin, GoogleLogin
+from accounts.views import UserViewSet, FacebookLogin, GoogleLogin, CurrentUserView
 from biolife.views import *
 
 router = routers.DefaultRouter()
@@ -29,7 +29,8 @@ urlpatterns = patterns('',
     url(r'^auth/registration/', include('rest_auth.registration.urls')),
     url(r'^account/', include('allauth.urls')),
     url(r'^auth/facebook/$', FacebookLogin.as_view(), name='fb_login'),
-    url(r'^auth/google/$', GoogleLogin.as_view(), name='google_login')
+    url(r'^auth/google/$', GoogleLogin.as_view(), name='google_login'),
+    url(r'^auth/current_user/$', CurrentUserView.as_view(), name='current_user'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 urlpatterns += staticfiles_urlpatterns()
