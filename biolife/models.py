@@ -33,6 +33,7 @@ class Session(BiolifeModel):
         (FOCAL, 'Focal Sampling'),
         (SCAN, 'Scan Sampling'),
     )
+    name = models.CharField(max_length=250)
     project = models.ForeignKey('Project')
     session_type = models.CharField(max_length=3, choices=SESSION_TYPE_CHOICES, default=SCAN)
     individuals = models.ManyToManyField('Individual')
