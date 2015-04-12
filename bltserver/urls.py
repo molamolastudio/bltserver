@@ -18,6 +18,11 @@ router.register(r'sessions', SessionViewSet)
 router.register(r'observations', ObservationViewSet)
 router.register(r'individuals', IndividualViewSet)
 router.register(r'tags', TagViewSet)
+router.register(r'locations', LocationViewSet)
+router.register(r'weathers', WeatherViewSet)
+router.register(r'photos', PhotoViewSet)
+
+router.register(r'dummy', DummyViewSet)
 
 urlpatterns = patterns('',
     # Examples:

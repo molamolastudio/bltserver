@@ -2,66 +2,110 @@ from rest_framework import serializers
 from .models import *
 
 # Serializers define the API representation.
-class ProjectSerializer(serializers.HyperlinkedModelSerializer):
+class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = (
-                    'created_by', 'updated_by',
-                    'name', 'ethogram', 'members', 'admins',
-                    'session_set', 'individual_set',
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'name', 'ethogram', 'members', 'admins', 'individuals',
+                    'session_set',
                  )
 
 class EthogramSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ethogram
         fields = (
-                    'created_by', 'updated_by',
-                    'name', 'information',
-                    'project_set', 'behaviour_set',
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'name', 'information', 'behaviours',
+                    'project_set', 
                  )
 
 class BehaviourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Behaviour
         fields = (
-                    'created_by', 'updated_by',
-                    'name', 'ethogram', 'information', 'photo',
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'name', 'information', 'photo',
                     'observation_set',
                  )
 
 
-class SessionSerializer(serializers.HyperlinkedModelSerializer):
+class SessionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Session
         fields = (
-                    'created_by', 'updated_by',
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
                     'project', 'session_type', 'individuals',
                     'observation_set',
                  )
 
-class ObservationSerializer(serializers.HyperlinkedModelSerializer):
+class ObservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Observation
         fields = (
-                    'created_by', 'updated_by',
-                    'session', 'recorded_behaviour', 'information', 'photo', 'timestamp', 'individual', 'location', 'weather'
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'session', 'recorded_behaviour', 'information', 'photo', 'timestamp', 'individual', 'location', 'weather',
                  )
 
-class IndividualSerializer(serializers.HyperlinkedModelSerializer):
+class IndividualSerializer(serializers.ModelSerializer):
     class Meta:
         model = Individual
         fields = (
-                    'created_by', 'updated_by',
-                    'label', 'photo', 'tags', 'project',
-                    'observation_set',
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'label', 'photo', 'tags',
+                    'observation_set', 'project_set', 'session_set'
                  )
 
-class TagSerializer(serializers.HyperlinkedModelSerializer):
+class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = (
-                    'created_by', 'updated_by',
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
                     'name',
                     'individual_set',
+                 )
+
+class LocationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Location
+        fields = (
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'location',
+                 )
+
+class WeatherSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Weather
+        fields = (
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'weather',
+                 )
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = (
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'image',
+                 )
+
+class DummySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Dummy
+        fields = (
+                    'id',
+                    'created_by', 'updated_by', 'created_at', 'updated_at',
+                    'stringProperty', 'intProperty', 'optionalStringProperty', 'dateProperty', 'imageProperty',
+                    'friends'
                  )
 
