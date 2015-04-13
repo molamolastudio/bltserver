@@ -108,4 +108,3 @@ class DummySerializer(serializers.ModelSerializer):
                     'stringProperty', 'intProperty', 'optionalStringProperty', 'dateProperty', 'imageProperty',
                     'friends'
                  )
-
