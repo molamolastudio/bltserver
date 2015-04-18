@@ -11,7 +11,7 @@ class ProjectSerializer(serializers.ModelSerializer):
                     'name', 'ethogram', 'members', 'admins', 'individuals',
                     'session_set',
                  )
-
+        
 class EthogramSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ethogram
@@ -19,9 +19,8 @@ class EthogramSerializer(serializers.ModelSerializer):
                     'id',
                     'created_by', 'updated_by', 'created_at', 'updated_at',
                     'name', 'information', 'behaviours',
-                    'project_set', 
                  )
-
+        
 class BehaviourSerializer(serializers.ModelSerializer):
     class Meta:
         model = Behaviour
@@ -29,8 +28,8 @@ class BehaviourSerializer(serializers.ModelSerializer):
                     'id',
                     'created_by', 'updated_by', 'created_at', 'updated_at',
                     'name', 'information', 'photo',
-                    'observation_set',
                  )
+        
 
 
 class SessionSerializer(serializers.ModelSerializer):
@@ -39,9 +38,10 @@ class SessionSerializer(serializers.ModelSerializer):
         fields = (
                     'id',
                     'created_by', 'updated_by', 'created_at', 'updated_at',
-                    'project', 'session_type', 'individuals',
+                    'name', 'project', 'session_type', 'individuals', 'interval',
                     'observation_set',
                  )
+        
 
 class ObservationSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,6 +51,7 @@ class ObservationSerializer(serializers.ModelSerializer):
                     'created_by', 'updated_by', 'created_at', 'updated_at',
                     'session', 'recorded_behaviour', 'information', 'photo', 'timestamp', 'individual', 'location', 'weather',
                  )
+        read_only_fields = ()
 
 class IndividualSerializer(serializers.ModelSerializer):
     class Meta:
@@ -61,6 +62,8 @@ class IndividualSerializer(serializers.ModelSerializer):
                     'label', 'photo', 'tags',
                     'observation_set', 'project_set', 'session_set'
                  )
+        read_only_fields = ('observation_set', 'project_set', 'session_set')
+
 
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
@@ -69,8 +72,8 @@ class TagSerializer(serializers.ModelSerializer):
                     'id',
                     'created_by', 'updated_by', 'created_at', 'updated_at',
                     'name',
-                    'individual_set',
                  )
+        
 
 class LocationSerializer(serializers.ModelSerializer):
     class Meta:

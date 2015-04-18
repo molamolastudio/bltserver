@@ -34,17 +34,18 @@ class Session(BiolifeModel):
         (SCAN, 'Scan Sampling'),
     )
     name = models.CharField(max_length=250)
-    project = models.ForeignKey('Project')
+    project = models.ForeignKey('Project', null=True)
     session_type = models.CharField(max_length=3, choices=SESSION_TYPE_CHOICES, default=SCAN)
     individuals = models.ManyToManyField('Individual')
+    interval = models.IntegerField(blank=True, null=True)
 
 class Observation(BiolifeModel):
-    session = models.ForeignKey('Session')
+    session = models.ForeignKey('Session', null=True)
     information = models.TextField(null=False, blank=True)
     recorded_behaviour = models.ForeignKey('Behaviour')
     photo = models.ForeignKey('Photo', blank=True, null=True, on_delete=models.SET_NULL)
     timestamp = models.DateTimeField()
-    individual = models.ForeignKey('Individual')
+    individual = models.ForeignKey('Individual', null=True, blank=True)
     location = models.ForeignKey('Location', blank=True, null=True, on_delete=models.SET_NULL)
     weather = models.ForeignKey('Weather', blank=True, null=True, on_delete=models.SET_NULL)
 
@@ -60,10 +61,10 @@ class Photo(BiolifeModel):
     image = models.ImageField()
 
 class Location(BiolifeModel):
-    location = models.TextField()
+    location = models.TextField(blank=True, null=False)
 
 class Weather(BiolifeModel):
-    weather = models.TextField()
+    weather = models.TextField(blank=True, null=False)
 
 class Dummy(BiolifeModel):
     stringProperty = models.TextField()
