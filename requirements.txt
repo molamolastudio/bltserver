@@ -5,3 +5,4 @@ django-allauth>0.19,<0.20
 Pillow>=2.7,<2.8
 django-toolbelt>=0.0.1,<0.1
 pytz
+django-sslify>=0.2.0
