@@ -123,7 +123,7 @@ REST_FRAMEWORK = {
     ) 
 }
 
-SITE_ID = 1
+SITE_ID = 2
 
 REST_SESSION_LOGIN = False
 
