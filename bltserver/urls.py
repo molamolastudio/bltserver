@@ -11,7 +11,7 @@ from biolife.views import *
 
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
-router.register(r'projects', ProjectViewSet)
+router.register(r'projects', ProjectViewSet, r'projects')
 router.register(r'ethograms', EthogramViewSet)
 router.register(r'behaviours', BehaviourViewSet)
 router.register(r'sessions', SessionViewSet)

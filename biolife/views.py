@@ -3,12 +3,17 @@ from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from .models import *
 from .serializers import *
+from django.contrib.auth.models import User
 
 # ViewSets define the view behavior.
+
 class ProjectViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, )
-    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.joined_project_set
 
 class EthogramViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, )

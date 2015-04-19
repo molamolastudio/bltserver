@@ -50,8 +50,10 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.google',
 )
 
+# SITE_ID = 2
+
 MIDDLEWARE_CLASSES = (
-    'sslify.middleware.SSLifyMiddleware',
+    # 'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -126,8 +128,6 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.AllowAny',
     )
 }
-
-SITE_ID = 2
 
 REST_SESSION_LOGIN = False
 
