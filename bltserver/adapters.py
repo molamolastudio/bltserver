@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.account.models import EmailAddress
+from allauth.account.utils import user_email, user_username, user_field
 
 class MessageFreeAdapter(DefaultAccountAdapter):
     """
