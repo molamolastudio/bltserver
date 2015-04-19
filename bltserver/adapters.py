@@ -2,6 +2,7 @@ from allauth.account.adapter import DefaultAccountAdapter
 from django.contrib.auth.models import User
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+from allauth.account.models import EmailAddress
 
 class MessageFreeAdapter(DefaultAccountAdapter):
     """
@@ -23,11 +24,12 @@ class MessageFreeAdapter(DefaultAccountAdapter):
         pass
 
 class AssociateEmailAccountAdapter(DefaultSocialAccountAdapter):
-    def pre_social_login(self, request, social_login):
+    def pre_social_login(self, request, sociallogin):
         try:
-            user = User.objects.get(email=social_login.email)
-            social_login.connect(request, user)
-            raise ImmediateHttpResponse(response)
+            user = User.objects.get(email=sociallogin.email)
+            sociallogin.connect(request, user)
+
+            raise ImmediateHttpResponse("Merge with existing account")
         except User.DoesNotExist:
             pass
 
