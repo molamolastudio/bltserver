@@ -23,13 +23,13 @@ class MessageFreeAdapter(DefaultAccountAdapter):
                     message_context={}, extra_tags=''):
         pass
 
-class AssociateEmailAccountAdapter(DefaultSocialAccountAdapter):
-    def pre_social_login(self, request, sociallogin):
-        try:
-            user = User.objects.get(email=sociallogin.email)
-            sociallogin.connect(request, user)
+# class AssociateEmailAccountAdapter(DefaultSocialAccountAdapter):
+#     def pre_social_login(self, request, sociallogin):
+#         try:
+#             user = User.objects.get(email=sociallogin.email)
+#             sociallogin.connect(request, user)
 
-            raise ImmediateHttpResponse("Merge with existing account")
-        except User.DoesNotExist:
-            pass
+#             raise ImmediateHttpResponse("Merge with existing account")
+#         except User.DoesNotExist:
+#             pass
 

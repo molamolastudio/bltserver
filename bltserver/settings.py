@@ -142,4 +142,4 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 ACCOUNT_ADAPTER = 'bltserver.adapters.MessageFreeAdapter'
-SOCIAL_ACCOUNT_ADAPTER = 'bltserver.adapters.AssociateEmailAccountAdapter'
+# SOCIALACCOUNT_ADAPTER = 'bltserver.adapters.AssociateEmailAccountAdapter'
