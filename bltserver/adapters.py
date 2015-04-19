@@ -1,4 +1,8 @@
 from allauth.account.adapter import DefaultAccountAdapter
+from django.contrib.auth.models import User
+from allauth.account.models import EmailAccount
+from allauth.exceptions import ImmediateHttpResponse
+from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
 class MessageFreeAdapter(DefaultAccountAdapter):
     """
@@ -18,3 +22,13 @@ class MessageFreeAdapter(DefaultAccountAdapter):
     def add_message(self, request, level, message_template,
                     message_context={}, extra_tags=''):
         pass
+
+class AssociateEmailAccountAdapter(DefaultSocialAccountAdapter):
+    def pre_social_login(self, request, social_login):
+        try:
+            user = User.objects.get(email=social_login.account.user.email)
+            social_login.connect(request, user)
+            raise ImmediateHttpResponse(response)
+        except User.DoesNotExist:
+            pass
+
