@@ -50,10 +50,10 @@ INSTALLED_APPS = (
     'allauth.socialaccount.providers.google',
 )
 
-# SITE_ID = 2
+SITE_ID = 2
 
 MIDDLEWARE_CLASSES = (
-    # 'sslify.middleware.SSLifyMiddleware',
+    'sslify.middleware.SSLifyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
