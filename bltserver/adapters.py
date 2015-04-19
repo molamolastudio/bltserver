@@ -1,6 +1,5 @@
 from allauth.account.adapter import DefaultAccountAdapter
 from django.contrib.auth.models import User
-from allauth.account.models import EmailAccount
 from allauth.exceptions import ImmediateHttpResponse
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 
