@@ -4,6 +4,7 @@ from allauth.exceptions import ImmediateHttpResponse
 from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
 from allauth.account.models import EmailAddress
 from allauth.account.utils import user_email, user_username, user_field
+from allauth.utils import valid_email_or_none
 
 class MessageFreeAdapter(DefaultAccountAdapter):
     """
@@ -38,7 +39,7 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
         email = data.get('email')
         name = data.get('name')
         user = sociallogin.user
-        user_username(user, username or email)
+        user_username(user, username or valid_email_or_none(email) or "anonymous")
         user_email(user, valid_email_or_none(email) or '')
         name_parts = (name or '').partition(' ')
         user_field(user, 'first_name', first_name or name_parts[0])
