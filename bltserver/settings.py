@@ -108,6 +108,10 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "allauth.socialaccount.context_processors.socialaccount",
 )
 
+SOCIAL_AUTH_PIPELINE = (
+    'social.pipeline.social_auth.associate_by_email',
+)
+
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
     "django.contrib.auth.backends.ModelBackend",
