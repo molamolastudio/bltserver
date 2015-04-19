@@ -23,13 +23,23 @@ class MessageFreeAdapter(DefaultAccountAdapter):
                     message_context={}, extra_tags=''):
         pass
 
-# class AssociateEmailAccountAdapter(DefaultSocialAccountAdapter):
-#     def pre_social_login(self, request, sociallogin):
-#         try:
-#             user = User.objects.get(email=sociallogin.email)
-#             sociallogin.connect(request, user)
+class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
 
-#             raise ImmediateHttpResponse("Merge with existing account")
-#         except User.DoesNotExist:
-#             pass
-
+    def populate_user(self,
+                      request,
+                      sociallogin,
+                      data):
+        # Warning: this method does not call super
+        # Please check every time allauth is updated
+        username = data.get('username')
+        first_name = data.get('first_name')
+        last_name = data.get('last_name')
+        email = data.get('email')
+        name = data.get('name')
+        user = sociallogin.user
+        user_username(user, username or email)
+        user_email(user, valid_email_or_none(email) or '')
+        name_parts = (name or '').partition(' ')
+        user_field(user, 'first_name', first_name or name_parts[0])
+        user_field(user, 'last_name', last_name or name_parts[2])
+        return user
