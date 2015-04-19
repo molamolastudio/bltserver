@@ -108,9 +108,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "allauth.socialaccount.context_processors.socialaccount",
 )
 
-SOCIAL_AUTH_PIPELINE = (
-    'social.pipeline.social_auth.associate_by_email',
-)
+ACCOUNT_UNIQUE_EMAIL = True
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -142,4 +140,3 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 ALLOWED_HOSTS = ['*']
 
 ACCOUNT_ADAPTER = 'bltserver.adapters.MessageFreeAdapter'
-# SOCIALACCOUNT_ADAPTER = 'bltserver.adapters.AssociateEmailAccountAdapter'
