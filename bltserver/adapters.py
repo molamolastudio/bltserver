@@ -25,7 +25,7 @@ class MessageFreeAdapter(DefaultAccountAdapter):
 class AssociateEmailAccountAdapter(DefaultSocialAccountAdapter):
     def pre_social_login(self, request, social_login):
         try:
-            user = User.objects.get(email=social_login.account.user.email)
+            user = User.objects.get(email=social_login.email)
             social_login.connect(request, user)
             raise ImmediateHttpResponse(response)
         except User.DoesNotExist:
