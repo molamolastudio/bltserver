@@ -19,7 +19,9 @@ class EthogramSerializer(serializers.ModelSerializer):
                     'id',
                     'created_by', 'updated_by', 'created_at', 'updated_at',
                     'name', 'information', 'behaviours',
+                    'project_set',
                  )
+        read_only_fields = ('project_set')
         
 class BehaviourSerializer(serializers.ModelSerializer):
     class Meta:
