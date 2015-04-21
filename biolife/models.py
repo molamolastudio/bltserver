@@ -12,14 +12,14 @@ class BiolifeModel(models.Model):
 class Project(BiolifeModel):
     name = models.CharField(max_length=250)
     ethogram = models.ForeignKey('Ethogram', null=True, blank=True)
-    members = models.ManyToManyField('auth.User', related_name='joined_project_set')
-    admins = models.ManyToManyField('auth.User', related_name='administered_project_set')
-    individuals = models.ManyToManyField('Individual')
+    members = models.ManyToManyField('auth.User', related_name='joined_project_set', null=True, blank=True)
+    admins = models.ManyToManyField('auth.User', related_name='administered_project_set', null=True, blank=True)
+    individuals = models.ManyToManyField('Individual', null=True, blank=True)
 
 class Ethogram(BiolifeModel):
     name = models.CharField(max_length=250)
     information = models.TextField(null=False, blank=True)
-    behaviours = models.ManyToManyField('Behaviour')
+    behaviours = models.ManyToManyField('Behaviour', null=True, blank=True)
 
 class Behaviour(BiolifeModel):
     name = models.CharField(max_length=200)
@@ -52,7 +52,7 @@ class Observation(BiolifeModel):
 class Individual(BiolifeModel):
     label = models.CharField(max_length=200)
     photo = models.ForeignKey('Photo', blank=True, null=True, on_delete=models.SET_NULL)
-    tags = models.ManyToManyField('Tag')
+    tags = models.ManyToManyField('Tag', blank=True, null=True)
 
 class Tag(BiolifeModel):
     name = models.CharField(max_length=100)
