@@ -39,7 +39,7 @@ class CustomSocialAccountAdapter(DefaultSocialAccountAdapter):
         email = data.get('email')
         name = data.get('name')
         user = sociallogin.user
-        user_username(user, username or valid_email_or_none(email) or "anonymous")
+        user_username(user, username or first_name or valid_email_or_none(email) or "anonymous")
         user_email(user, valid_email_or_none(email) or '')
         name_parts = (name or '').partition(' ')
         user_field(user, 'first_name', first_name or name_parts[0])
